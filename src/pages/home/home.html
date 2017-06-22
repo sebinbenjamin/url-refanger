@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Redirect Me</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card col-8 offset-2 padding>
+    <ion-list>
+      <ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Defanged URL - (paste URL & press enter)</ion-label>
+        <ion-textarea #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL" fz-elastic></ion-textarea>
+      </ion-item>
+      <ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Result</ion-label>
+        <ion-textarea [(ngModel)]="originalURL" name="originalURL" fz-elastic></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col align-self-start></ion-col>
+        <ion-col align-self-center></ion-col>
+        <ion-col align-self-end>
+          <button ion-button (click)="openURL()" default color="primary" icon-right>GO&nbsp;<ion-icon name="paper-plane"></ion-icon></button>
+          <button ion-button (click)="copySuccess()" default [style.background]="isCopied ? 'green' : 'orange'"
+            icon-right>
+            Copy&nbsp;<ion-icon name="copy"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <p text-center>
+      Please take care of http/https in the result. https is used by default in Open URL
+    </p>
+  </ion-toolbar>
+</ion-footer>
