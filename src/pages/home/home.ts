@@ -6,42 +6,71 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  httpsColor: {
+    background: string;
+  };
+  copyColor: {
+    background: string;
+  };
   defangedURL: string = '';
   originalURL: string = '';
-  isCopied: boolean = false;
-  constructor(public navCtrl: NavController) {
+  httpsEnabled: boolean;
 
+  constructor(public navCtrl: NavController) {
+    this.copyColor = { background: 'orange' };
+    this.httpsColor = { background: 'grey' };
+    this.httpsEnabled = false;
   }
   @HostListener('document:keydown', ['$event'])
-  keydown(event: KeyboardEvent){
-    if(event.keyCode == 13){
+  keydown(event: KeyboardEvent) {
+    if (event.keyCode == 13) {
       this.openURL();
     }
   }
-  @ViewChild('focusInput') myInput ;
+  @ViewChild('focusInput') myInput;
 
   magic(event) {
     console.log('defanged URL: ' + this.defangedURL);
     this.originalURL = this.defangedURL
       .replace(/[^a-zA-Z0-9?=+&-\/:._\[\]]/g, '')
       .replace(/BLOCKED/g, '')
-      .replace(/https:\/\//g,'')
-      .replace(/http:\/\//g,'')
+      .replace(/https:\/\//g, '')
+      .replace(/http:\/\//g, '')
       .replace(/\[.\]/g, '.');
     console.log('Original URL :' + this.originalURL);
   }
-  openURL(){
+  openURL() {
     console.log('Opened: ' + this.originalURL);
-    window.open("http://" + this.originalURL);
+    if (this.httpsEnabled)
+      window.open("https://" + this.originalURL);
+    else
+      window.open("http://" + this.originalURL);
   }
-  copySuccess(){
-    this.isCopied = true;
-    console.log('copy clicked');
-     setTimeout(function(){ 
-        this.isCopied = false;
-        console.log('called false');
-        },3000);
+  copySuccess(text) {
+    //copies data to clipboard
+    var textField = document.createElement('textarea');
+    textField.innerText = text;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand('copy');
+    textField.remove();
+
+    //changes color of copy button
+    this.copyColor.background = 'green';
+    setTimeout(() => {
+      this.copyColor.background = 'orange';
+    }, 1000);
+  }
+  toggleHttps() {
+    console.log(this.httpsEnabled)
+    if (this.httpsEnabled) {
+      this.httpsColor.background = 'grey';
+      this.httpsEnabled = false;
+    }
+    else {
+      this.httpsEnabled = true;
+      this.httpsColor.background = 'green';
+    }
+    console.log(this.httpsEnabled)
   }
 }
-
-https://w3c.github.io/clipboard-apis/

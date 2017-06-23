@@ -10,7 +10,7 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary" floating>Defanged URL - (paste URL & press enter)</ion-label>
-        <ion-textarea #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL" fz-elastic></ion-textarea>
+        <ion-textarea autofocus #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL" fz-elastic></ion-textarea>
       </ion-item>
       <ion-item>
       </ion-item>
@@ -21,12 +21,17 @@
     </ion-list>
     <ion-item>
       <ion-row>
-        <ion-col align-self-start></ion-col>
+        <ion-col align-self-start>
+          <button ion-button (click)="toggleHttps()" default [ngStyle]="httpsColor" icon-left>
+            HTTPS&nbsp;&nbsp;
+            <ion-icon name="lock">
+            </ion-icon>
+          </button>
+        </ion-col>
         <ion-col align-self-center></ion-col>
         <ion-col align-self-end>
           <button ion-button (click)="openURL()" default color="primary" icon-right>GO&nbsp;<ion-icon name="paper-plane"></ion-icon></button>
-          <button ion-button (click)="copySuccess()" default [style.background]="isCopied ? 'green' : 'orange'"
-            icon-right>
+          <button ion-button (click)="copySuccess(originalURL)" default [ngStyle]="copyColor" icon-right>
             Copy&nbsp;<ion-icon name="copy"></ion-icon>
           </button>
         </ion-col>
@@ -37,7 +42,7 @@
 <ion-footer>
   <ion-toolbar color="light">
     <p text-center>
-      Please take care of http/https in the result. https is used by default in Open URL
+      http is used by default. toogle to green for https
     </p>
   </ion-toolbar>
 </ion-footer>
