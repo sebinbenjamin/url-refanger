@@ -32,7 +32,7 @@ export class HomePage {
   magic(event) {
     console.log('defanged URL: ' + this.defangedURL);
     this.originalURL = this.defangedURL
-      .replace(/[^a-zA-Z0-9?=+&-\/:._\[\]]/g, '')
+      .replace(/[^a-zA-Z0-9#?=+&-\/:._\[\]]/g, '')
       .replace(/BLOCKED/g, '')
       .replace(/https:\/\//g, '')
       .replace(/http:\/\//g, '')
@@ -47,6 +47,11 @@ export class HomePage {
       window.open("http://" + this.originalURL);
   }
   copySuccess(text) {
+    if (this.httpsEnabled)
+      text = "https://" + text;
+    else
+      text = "http://" + text;
+
     //copies data to clipboard
     var textField = document.createElement('textarea');
     textField.innerText = text;
