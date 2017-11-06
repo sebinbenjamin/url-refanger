@@ -18,8 +18,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
     this.copyColor = { background: 'orange' };
-    this.httpsColor = { background: 'grey' };
-    this.httpsEnabled = false;
+    this.httpsColor = { background: 'green' };
+    this.httpsEnabled = true;
   }
   @HostListener('document:keydown', ['$event'])
   keydown(event: KeyboardEvent) {
@@ -32,7 +32,7 @@ export class HomePage {
   magic(event) {
     console.log('defanged URL: ' + this.defangedURL);
     this.originalURL = this.defangedURL
-      .replace(/[^a-zA-Z0-9#?=+&-\/:._\[\]]/g, '')
+      .replace(/[^a-zA-Z0-9#?=+&-\/:._%{}\[\]]/g, '')
       .replace(/BLOCKED/g, '')
       .replace(/https:\/\//g, '')
       .replace(/http:\/\//g, '')
@@ -41,21 +41,25 @@ export class HomePage {
   }
   openURL() {
     console.log('Opened: ' + this.originalURL);
-    if (this.httpsEnabled)
-      window.open("https://" + this.originalURL);
+    console.log(this.originalURL.length)
+    if (this.originalURL.length > 0)
+      if (this.httpsEnabled)
+        window.open("https://" + this.originalURL);
+      else
+        window.open("http://" + this.originalURL);
     else
-      window.open("http://" + this.originalURL);
+      alert('Please enter the URL !');
   }
-  copySuccess(text) {
-    if (this.httpsEnabled)
-      text = "https://" + text;
-    else
-      text = "http://" + text;
-
+  copySuccess() {
     //copies data to clipboard
     var textField = document.createElement('textarea');
-    textField.innerText = text;
-    document.body.appendChild(textField);
+
+    if (this.httpsEnabled)
+      textField.innerText = "https://" + this.originalURL;
+    else
+      textField.innerText = "http://" + this.originalURL;
+    
+      document.body.appendChild(textField);
     textField.select();
     document.execCommand('copy');
     textField.remove();

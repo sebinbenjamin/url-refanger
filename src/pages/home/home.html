@@ -31,7 +31,7 @@
         <ion-col align-self-center></ion-col>
         <ion-col align-self-end>
           <button ion-button (click)="openURL()" default color="primary" icon-right>GO&nbsp;<ion-icon name="paper-plane"></ion-icon></button>
-          <button ion-button (click)="copySuccess(originalURL)" default [ngStyle]="copyColor" icon-right>
+          <button ion-button (click)="copySuccess()" default [ngStyle]="copyColor" icon-right>
             Copy&nbsp;<ion-icon name="copy"></ion-icon>
           </button>
         </ion-col>
@@ -42,7 +42,7 @@
 <ion-footer>
   <ion-toolbar color="light">
     <p text-center>
-      http is used by default. toogle to green for https
+      https is used by default. toogle button to change it.
     </p>
   </ion-toolbar>
 </ion-footer>
