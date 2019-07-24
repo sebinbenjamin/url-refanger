@@ -1,2 +1,2 @@
-# url-defanger
-Defangs URLs after security applications mess them up
+# url-refanger
+Fixes 'Defanged URLs' messed up by security applications.
