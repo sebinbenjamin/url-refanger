@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Fang Me</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card col-8 offset-2 padding>
+    <ion-list>
+      <ion-item lines="none"></ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Defanged URL - (paste URL & press enter to open)</ion-label>
+        <ion-textarea autofocus #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL"
+          fz-elastic></ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Result</ion-label>
+        <ion-textarea [(ngModel)]="originalURL" name="originalURL" fz-elastic></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-item lines="none">
+      <ion-col>
+        <ion-button [color]='httpsColor' default (click)="toggleHttps()">
+          HTTPS&nbsp;&nbsp;
+          <ion-icon name="lock" slot="start"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col offset="8">
+        <ion-button (click)="openURL()" default color="primary">
+          GO&nbsp;
+          <ion-icon name="paper-plane" slot="end"></ion-icon>
+        </ion-button>
+        <ion-button (click)="copySuccess()" default [color]="copyColor">
+          Copy&nbsp;
+          <ion-icon name="copy" slot="end"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-item>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <p text-center>
+      https is used by default. toogle button to change it.
+    </p>
+  </ion-toolbar>
+</ion-footer>

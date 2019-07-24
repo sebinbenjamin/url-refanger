@@ -1,5 +1,5 @@
 {
-  "name": "URL",
+  "name": "url-fanger",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "angular"
 }
