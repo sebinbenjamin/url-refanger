@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Redirect Me</ion-title>
+    <ion-title>Fang Me</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -9,8 +9,9 @@
       <ion-item>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating>Defanged URL - (paste URL & press enter)</ion-label>
-        <ion-textarea autofocus #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL" fz-elastic></ion-textarea>
+        <ion-label color="primary" floating>Defanged URL - (paste URL & press enter to open)</ion-label>
+        <ion-textarea autofocus #focusInput [(ngModel)]="defangedURL" (ngModelChange)="magic($event)" name="defangedURL"
+          fz-elastic></ion-textarea>
       </ion-item>
       <ion-item>
       </ion-item>
@@ -30,7 +31,8 @@
         </ion-col>
         <ion-col align-self-center></ion-col>
         <ion-col align-self-end>
-          <button ion-button (click)="openURL()" default color="primary" icon-right>GO&nbsp;<ion-icon name="paper-plane"></ion-icon></button>
+          <button ion-button (click)="openURL()" default color="primary" icon-right>GO&nbsp;<ion-icon
+              name="paper-plane"></ion-icon></button>
           <button ion-button (click)="copySuccess()" default [ngStyle]="copyColor" icon-right>
             Copy&nbsp;<ion-icon name="copy"></ion-icon>
           </button>
